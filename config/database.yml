@@ -22,7 +22,6 @@ default: &default
   pool: 5
   host: localhost
 
-
 development:
   <<: *default
   database: Talent_development
