@@ -83,4 +83,4 @@ production:
   <<: *default
   database: Talent_production
   username: Talent
-  password: <%= ENV['TALENT_DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.secrets.database_secret_key %>
