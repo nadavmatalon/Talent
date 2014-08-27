@@ -8,7 +8,15 @@
 		<%= render 'layouts/shim' %>
 	</head>
 	<body>
-		<br/>        
+		<br/>
+		<% if current_client %>
+   			<%= "Welcome #{current_client.email}" %>
+   		<% elsif current_developer %>
+   			<%= "Welcome #{current_developer.email}" %>
+   		<% else %>
+   			<%= "Welcome Guest" %>
+   		<% end %>
+		<br/><br/>
     	<%= content_tag(:p, notice, id: 'notice') if notice %>
     	<%= content_tag(:p, alert,  id: 'alert') if alert  %>
        	<br/>       
@@ -16,8 +24,15 @@
 		  	<%= link_to('Dashboard', client_dashboard_path(current_client)) %>        
 		  	<%= link_to('Profile', client_profile_path(current_client)) %>        
 		  	<%= link_to('Edit Profile', edit_client_registration_path) %>        
-		  	<%= link_to('Sign out', destroy_client_session_path, method: :delete) %>        
+		  	<%= link_to('Sign out', destroy_client_session_path, method: :delete) %> 
+		<% elsif developer_signed_in? %>
+		  	<%= link_to('Dashboard', developer_dashboard_path(current_developer)) %>        
+		  	<%= link_to('Profile', developer_profile_path(current_developer)) %>        
+		  	<%= link_to('Edit Profile', edit_developer_registration_path) %>        
+		  	<%= link_to('Sign out', destroy_developer_session_path, method: :delete) %> 
 		<% else %>
+		 	<%= link_to('Developer Sign up', new_developer_registration_path)  %>  
+		  	<%= link_to('Developer Sign in', new_developer_session_path)  %>  
 		 	<%= link_to('Client Sign up', new_client_registration_path)  %>  
 		  	<%= link_to('Client Sign in', new_client_session_path)  %>  
 			<%= link_to('Home', root_path) %>
