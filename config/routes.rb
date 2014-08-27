@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
 
+  devise_for :developers, controllers: { registrations: "developers/registrations"}
+  devise_for :clients, controllers: { registrations: "clients/registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'welcome#index'
+  # root 'welcome#index'
 
+  root 'welcome#index' 
+
+  get "clients/index/:id" => 'clients#index', as: :client_dashboard 
+  get "clients/show/:id" => 'clients#show', as: :client_profile 
+
+  get "developers/index/:id" => 'developers#index', as: :developer_dashboard 
+  get "developers/show/:id" => 'developers#show', as: :developer_profile 
+
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

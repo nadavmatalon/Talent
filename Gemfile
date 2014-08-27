@@ -18,6 +18,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # https://github.com/macournoyer/thin/
 gem 'thin'
+# https://github.com/plataformatec/devise
+gem 'devise'
 
 group :doc do
     # https://github.com/voloko/sdoc

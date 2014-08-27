@@ -15,7 +15,24 @@
  *= require_self
  */
 
-.test-title {
+.general-title {
+	font-size: 25px;
+	color: blue;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.client-title {
+	font-size: 25px;
+	color: green;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.developer-title {
 	font-size: 25px;
 	color: orange;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
+
