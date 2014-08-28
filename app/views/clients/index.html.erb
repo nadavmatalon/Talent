@@ -1,4 +1,22 @@
 
 <p class='client-title'>Client Dashboard</p>
 
-<p class='textbox-label'><%= @client.email %></p>
+<div class='project-list-container'>
+	<% if @projects != [] %>
+		<% @projects.each do |project| %>
+			<div class='project-container'>
+				<p class='project-text'>Project name: <%= project.name %></p>
+				<p class='project-text'>Project status: <%= project.status %></p>
+				<p class='project-links'><%= link_to('Show', client_project_path(current_client, project.id), class: 'small-button') %>  
+				<%= link_to('Edit', edit_client_project_path(current_client, project.id), class: 'small-button') %></p>  
+			</div>
+		<% end %>
+	<% else %>
+		<p class='textbox-label'>No Projects Yet</p>
+	<% end %>
+</div>
+
+
+<div class='create-button-container'>
+	<%= link_to('Create New Project', new_client_project_path(current_client), class: 'create-button button') %>  
+</div>

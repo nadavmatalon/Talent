@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "developers/index/:id" => 'developers#index', as: :developer_dashboard 
   get "developers/show/:id" => 'developers#show', as: :developer_profile 
 
+  resources :clients do 
+    resources :projects
+  end
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
