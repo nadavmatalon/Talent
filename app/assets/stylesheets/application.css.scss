@@ -15,24 +15,92 @@
  *= require_self
  */
 
+.title {
+	font-size: 30px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	margin-left: 5px;
+}
+
 .general-title {
-	font-size: 25px;
+	@extend .title;
 	color: blue;
-	margin-top: 5px;
-	margin-bottom: 5px;
 }
 
 .client-title {
-	font-size: 25px;
+	@extend .title;
 	color: green;
-	margin-top: 5px;
-	margin-bottom: 5px;
 }
 
 .developer-title {
-	font-size: 25px;
+	@extend .title;
 	color: orange;
-	margin-top: 5px;
-	margin-bottom: 5px;
 }
+
+.button {
+	padding-top: 4px;
+	padding-left: 7px;
+	padding-right: 8px;
+	padding-bottom: 5px;
+	font-size: 18px;
+	text-decoration: none;
+	color: black;
+	border: 1px solid rgb(100, 100, 100);
+	border-radius: 4px;
+	background: rgb(220, 220, 220);
+	margin-left: 5px;
+	margin-right: 5px;
+	&:hover {
+		color: rgb(120, 120, 120);
+		cursor: default;
+	}
+}
+
+#system-message, #notice, #alert {
+	font-size: 18px;
+	margin-left: 5px;
+}
+
+.textbox-container {
+	margin-top: 2px;
+	margin-bottom: 7px;
+}
+
+.textbox-label {
+	font-size: 18px;
+	margin-left: 5px;
+}
+
+.textbox {
+	font-size: 16px;
+	outline: none;
+	border: 1px solid rgb(100, 100, 100);
+	border-radius: 1px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-left: 5px;
+}
+
+.submit {
+	color: black;
+	outline: none;
+	height: 26px;
+	font-size: 14px;
+	border: 1px solid rgb(100, 100, 100);
+	border-radius: 2px;
+	line-height: 0px;
+	margin-top: 10px;
+	margin-left: 5px;
+	&:hover {
+		color: rgb(120, 120, 120);
+		cursor: default;
+	}
+}
+
+
+
+
+
+
 
