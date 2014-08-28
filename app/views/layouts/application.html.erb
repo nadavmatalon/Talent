@@ -10,32 +10,32 @@
 	<body>
 		<br/>
 		<% if current_client %>
-   			<%= "Welcome #{current_client.email}" %>
+			<%= content_tag(:p, "Welcome #{current_client.email}", id: 'system-message') %>
    		<% elsif current_developer %>
-   			<%= "Welcome #{current_developer.email}" %>
+			<%= content_tag(:p, "Welcome #{current_developer.email}", id: 'system-message') %>
    		<% else %>
-   			<%= "Welcome Guest" %>
+   			<%= content_tag(:p, "Welcome Guest", id: 'system-message') %>
    		<% end %>
 		<br/>
     	<%= content_tag(:p, notice, id: 'notice') if notice %>
     	<%= content_tag(:p, alert,  id: 'alert') if alert  %>
        	<br/>       
 		<% if client_signed_in? %>
-		  	<%= link_to('Dashboard', client_dashboard_path(current_client)) %>        
-		  	<%= link_to('Profile', client_profile_path(current_client)) %>        
-		  	<%= link_to('Edit Profile', edit_client_registration_path) %>        
-		  	<%= link_to('Sign out', destroy_client_session_path, method: :delete) %> 
+		  	<%= link_to('Dashboard', client_dashboard_path(current_client), class: 'button') %>        
+		  	<%= link_to('Profile', client_profile_path(current_client), class: 'button') %>        
+		  	<%= link_to('Edit Profile', edit_client_registration_path, class: 'button') %>        
+		  	<%= link_to('Sign out', destroy_client_session_path, method: :delete, class: 'button') %> 
 		<% elsif developer_signed_in? %>
-		  	<%= link_to('Dashboard', developer_dashboard_path(current_developer)) %>        
-		  	<%= link_to('Profile', developer_profile_path(current_developer)) %>        
-		  	<%= link_to('Edit Profile', edit_developer_registration_path) %>        
-		  	<%= link_to('Sign out', destroy_developer_session_path, method: :delete) %> 
+		  	<%= link_to('Dashboard', developer_dashboard_path(current_developer), class: 'button') %>        
+		  	<%= link_to('Profile', developer_profile_path(current_developer), class: 'button') %>        
+		  	<%= link_to('Edit Profile', edit_developer_registration_path, class: 'button') %>        
+		  	<%= link_to('Sign out', destroy_developer_session_path, method: :delete, class: 'button') %> 
 		<% else %>
-		 	<%= link_to('Developer Sign up', new_developer_registration_path)  %>  
-		  	<%= link_to('Developer Sign in', new_developer_session_path)  %>  
-		 	<%= link_to('Client Sign up', new_client_registration_path)  %>  
-		  	<%= link_to('Client Sign in', new_client_session_path)  %>  
-			<%= link_to('Home', root_path) %>
+		 	<%= link_to('Developer Sign up', new_developer_registration_path, class: 'button') %>  
+		  	<%= link_to('Developer Sign in', new_developer_session_path, class: 'button') %>  
+		 	<%= link_to('Client Sign up', new_client_registration_path, class: 'button') %>  
+		  	<%= link_to('Client Sign in', new_client_session_path, class: 'button') %>  
+			<%= link_to('Home', root_path, class: 'button') %>
 		<% end %>
 		<br/><br/>        
 
