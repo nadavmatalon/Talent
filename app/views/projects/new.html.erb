@@ -10,8 +10,8 @@
 	<%= form.text_field :name, autofocus: true, class: 'textbox' %></div>
 
 	<div class='links-container')>
-		<%= form.submit :Create, class: 'submit' %>
-		<%= link_to('Back', :back, class: 'button') %>  
+		<%= form.submit 'Create', class: 'submit' %>
+		<%= link_to('Back', client_dashboard_path(@client), class: 'button') %>  
 	</div>
 <% end %>
 

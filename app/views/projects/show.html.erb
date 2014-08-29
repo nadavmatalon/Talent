@@ -2,7 +2,9 @@
 <p class='client-title'>Show Project</p>
 
 <div class='project-container'>
+	<p class='project-text'>ID: <%= @project.id %></p>
 	<p class='project-text'>Name: <%= @project.name %></p>
+	<p class='project-text'>Status: <%= @project.status %></p>
 </div>
 	<%= link_to('Edit Project', edit_client_project_path(current_client, @project.id), class: 'button') %>  
-	<%= link_to('Back', :back, class: 'button') %>  
+	<%= link_to('Back', client_dashboard_path(@client), class: 'button') %>  
