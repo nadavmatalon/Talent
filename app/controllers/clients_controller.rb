@@ -1,16 +1,22 @@
 class ClientsController < ApplicationController
 
-before_action :authenticate_client!
+	before_action :authenticate_client!, :confirm_identity
 
 	def index
-	    @client = Client.find params[:id]
 	    @projects = @client.projects.to_a.sort_by {|project| project.id}.reverse
-	    redirect_to root_path unless @client == current_client
 	end
 
 	def show
-	    @client = Client.find params[:id] 
-	    redirect_to root_path unless @client == current_client
+
+	end
+
+	private
+
+	def confirm_identity
+		@client = Client.find params[:id] unless Client.find_by(id: params[:id]).nil?
+		redirect_to root_path, alert: "Access Denied!" unless @client == current_client
 	end
 
 end
+
+

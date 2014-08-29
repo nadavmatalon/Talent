@@ -1,12 +1,14 @@
 class ProjectsController < ApplicationController
 
+	before_action :authenticate_client!, :confirm_identity
+	
+	before_action :confirm_ownership, only: [:show, :edit, :update, :destroy]
+
 	def new
-		@client = Client.find params[:client_id]
 		@project = @client.projects.new
 	end
 
 	def create
-		@client = Client.find params[:client_id]
 		@project = @client.projects.new project_params
 		if @project.save
 			#redirect back to the client dashboard
@@ -19,18 +21,14 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@client = Client.find params[:client_id]
-		@project = Project.find params[:id]
+
 	end
 
 	def edit
-		@client = Client.find params[:client_id]
-		@project = Project.find params[:id]
+
 	end
 
 	def update
-		@client = Client.find params[:client_id] 
-		@project = Project.find params[:id]
    		if @project.update project_params
    			# redirect back to the client dashboard
    			redirect_to client_dashboard_path(@client), notice: "Project successfully updated."
@@ -42,8 +40,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def destroy
-		@client = Client.find params[:client_id]
-		@project = Project.find params[:id]
 		@project.destroy
 		redirect_to client_dashboard_path(@client), notice: "Project successfully deleted."
 	end
@@ -53,6 +49,16 @@ class ProjectsController < ApplicationController
 
 	def project_params
 		params[:project].permit(:id, :name, :status, :client_id)
+	end
+
+	def confirm_identity
+		@client = Client.find params[:client_id] unless Client.find_by(id: params[:client_id]).nil?
+		redirect_to root_path, alert: "Access Denied!" unless @client == current_client
+	end
+
+	def confirm_ownership
+		@project = Project.find params[:id] unless Project.find_by(id: params[:id]).nil?
+		redirect_to root_path, alert: "Access Denied!" unless @client.projects.include?(@project)
 	end
 
 end
