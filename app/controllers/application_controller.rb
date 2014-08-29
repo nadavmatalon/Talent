@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
    	before_filter :configure_permitted_parameters, if: :devise_controller?
 
 
-   	protected
+   	private
 
 	def after_sign_up_path_for(resource)
 		if current_client
@@ -32,6 +32,5 @@ class ApplicationController < ActionController::Base
     	devise_parameter_sanitizer.for(:password_edit) { |u| u.permit(:id, :email, :password, :password_confirmation, :current_password) }
     	devise_parameter_sanitizer.for(:password_new) { |u| u.permit(:id, :email, :password, :password_confirmation, :current_password) }
   	end
-
 
 end
