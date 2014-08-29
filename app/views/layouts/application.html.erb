@@ -18,7 +18,7 @@
    		<% end %>
 		<br/>
     	<%= content_tag(:p, notice, id: 'notice') if notice %>
-    	<%= content_tag(:p, alert,  id: 'alert') if alert  %>
+    	<%= content_tag(:p, alert,  id: 'alert') if alert %>
        	<br/>       
 		<% if client_signed_in? %>
 		  	<%= link_to('Dashboard', client_dashboard_path(current_client), class: 'button') %>        
