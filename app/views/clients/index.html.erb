@@ -5,10 +5,14 @@
 	<% if @projects != [] %>
 		<% @projects.each do |project| %>
 			<div class='project-container'>
+				<p class='project-text'>Project ID: <%= project.id %></p>
 				<p class='project-text'>Project name: <%= project.name %></p>
 				<p class='project-text'>Project status: <%= project.status %></p>
-				<p class='project-links'><%= link_to('Show', client_project_path(current_client, project.id), class: 'small-button') %>  
-				<%= link_to('Edit', edit_client_project_path(current_client, project.id), class: 'small-button') %></p>  
+				<p class='project-links'>
+					<%= link_to 'Show', client_project_path(current_client, project.id), class: 'small-button' %>  
+					<%= link_to 'Edit', edit_client_project_path(current_client, project.id), class: 'small-button' %>
+					<%= link_to 'Delete', client_project_path(current_client, project.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'small-button' %>
+				</p>  
 			</div>
 		<% end %>
 	<% else %>
@@ -16,7 +20,9 @@
 	<% end %>
 </div>
 
-
 <div class='create-button-container'>
-	<%= link_to('Create New Project', new_client_project_path(current_client), class: 'create-button button') %>  
+	<%= link_to 'Create New Project', new_client_project_path(current_client), class: 'create-button button' %>  
 </div>
+
+
+

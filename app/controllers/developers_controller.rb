@@ -1,6 +1,6 @@
 class DevelopersController < ApplicationController
-before_action :authenticate_developer!
 
+before_action :authenticate_developer!
 
 	def index
 	    @developer = Developer.find params[:id] 

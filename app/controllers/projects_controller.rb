@@ -7,10 +7,12 @@ class ProjectsController < ApplicationController
 
 	def create
 		@client = Client.find params[:client_id]
-		@project = @client.projects.create project_params
-		if @project.valid?
-			redirect_to client_dashboard_path(@client)  #redirect back to the client dashboard
-			# redirect_to client_project_path(@client, @project) #redirect to the show project
+		@project = @client.projects.new project_params
+		if @project.save
+			#redirect back to the client dashboard
+			redirect_to client_dashboard_path(@client), notice: "Project successfully created."
+			# redirect to the show project
+			# redirect_to client_project_path(@client, @project)
 		else
 			render "new"
 		end
@@ -29,20 +31,28 @@ class ProjectsController < ApplicationController
 	def update
 		@client = Client.find params[:client_id] 
 		@project = Project.find params[:id]
-		@project.update project_params
-   		if !@project.errors.messages.any?
-   			redirect_to client_dashboard_path(@client)  #redirect back to the client dashboard
-			# redirect_to client_project_path(@client, @project) #redirect to the show project
+   		if @project.update project_params
+   			# redirect back to the client dashboard
+   			redirect_to client_dashboard_path(@client), notice: "Project successfully updated."
+   			# redirect to the show project  
+			# redirect_to client_project_path(@client, @project)
 		else
 			render "edit"
 		end
+	end
+
+	def destroy
+		@client = Client.find params[:client_id]
+		@project = Project.find params[:id]
+		@project.destroy
+		redirect_to client_dashboard_path(@client), notice: "Project successfully deleted."
 	end
 
 
 	private
 
 	def project_params
-		params[:project].permit(:id, :name, :status, :client_id, :errors, :messages)
+		params[:project].permit(:id, :name, :status, :client_id)
 	end
 
 end
