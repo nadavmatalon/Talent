@@ -9,6 +9,16 @@
 	<div>
 		<%= form.label :name, class: 'project-text' %><br>
 		<%= form.text_field :name, autofocus: true, class: 'textbox' %>
+	</div><br/>
+	<div>
+		<% @skills.each do |skill| %>
+			<% if @project.skills.include?(skill) %>
+				<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
+			<% else %>
+				<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
+			<% end %>
+			<label for=<%= skill.name.downcase %>><%= skill.name %></label>
+		<% end %>
 	</div>
 	<div class='links-container')>
 	<%= form.submit 'Update', class: 'submit' %>
