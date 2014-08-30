@@ -8,15 +8,17 @@
 				<p class='project-text'>Project ID: <%= project.id %></p>
 				<p class='project-text'>Project name: <%= project.name %></p>
 				<p class='project-text'>Project status: <%= project.status %></p>
-				<p class='project-text'>Project required skills:
+				<p class='project-text'>Project required skills:</p>
 					<% if project.skills.any? %>
 						<% project.skills.each do |skill| %>
-							<%= skill.name %>
+							<div class="ck-button">
+								<label><span><%= skill.name %></span></label>
+							</div>
 						<% end %>
 					<% else %>
-							No skills defined
+						<p class='project-text'>No skills defined</p>
 					<% end %>
-				</p>
+				<br/><br/>
 				<p class='project-links'>
 					<%= link_to 'Show', client_project_path(current_client, project.id), class: 'small-button' %>  
 					<%= link_to 'Edit', edit_client_project_path(current_client, project.id), class: 'small-button' %>

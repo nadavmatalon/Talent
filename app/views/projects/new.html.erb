@@ -11,15 +11,20 @@
 		<%= form.text_field :name, autofocus: true, class: 'textbox' %>
 	</div><br/>
 	<div>
+		<p class='project-text'>Required Skills:</p><br/>
 		<% @skills.each do |skill| %>
-			<% if @marked_skills.include?(skill) %>
-				<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
-			<% else %>
-				<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
-			<% end %>
-			<label for=<%= skill.name.downcase %>><%= skill.name %></label>
+			<div class="ck-button">
+				<label for=<%= skill.name.downcase %>>
+					<% if @marked_skills.include?(skill) %>
+						<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
+					<% else %>
+						<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
+					<% end %>
+					<span><%= skill.name %></span>
+				</label>
+			</div>
 		<% end %>
-	</div>
+	</div><br/>
 	<div class='links-container')>
 		<%= form.submit 'Create', class: 'submit' %>
 		<%= link_to('Back', client_dashboard_path(@client), class: 'button') %>  

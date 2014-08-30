@@ -5,15 +5,16 @@
 	<p class='project-text'>ID: <%= @project.id %></p>
 	<p class='project-text'>Name: <%= @project.name %></p>
 	<p class='project-text'>Status: <%= @project.status %></p>
-	<p class='project-text'>Required skills:
-		<% if @project.skills.any? %>
-			<% @project.skills.each do |skill| %>
-				<%= skill.name %>
-			<% end %>
-		<% else %>
-				No skills defined
+	<p class='project-text'>Required Skills:</p>
+	<% if @project.skills.any? %>
+		<% @project.skills.each do |skill| %>
+			<div class="ck-button">
+				<label><span><%= skill.name %></span></label>
+			</div>
 		<% end %>
-	</p>
+	<% else %>
+		<p class='project-text'>No skills defined</p>
+	<% end %>
 </div>
 
 <%= link_to('Edit Project', edit_client_project_path(current_client, @project.id), class: 'button') %>  
