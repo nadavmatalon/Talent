@@ -5,17 +5,27 @@ class ProjectsController < ApplicationController
 	before_action :confirm_ownership, only: [:show, :edit, :update, :destroy]
 
 	def new
+		@skills = Skill.all
+		@marked_skills = []
 		@project = @client.projects.new
 	end
 
 	def create
 		@project = @client.projects.new project_params
+		@marked_skills = []
+		Skill.all.each do |skill|			
+			@marked_skills << skill if params[skill.name.downcase] == "on"			 	
+		end
 		if @project.save
+			Skill.all.each do |skill|			
+				@project.skills << skill if params[skill.name.downcase] == "on"			 	
+			end
 			#redirect back to the client dashboard
 			redirect_to client_dashboard_path(@client), notice: "Project successfully created."
 			# redirect to the show project
 			# redirect_to client_project_path(@client, @project)
 		else
+			@skills = Skill.all
 			render "new"
 		end
 	end
@@ -25,16 +35,22 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
-
+		@skills = Skill.all
 	end
 
 	def update
    		if @project.update project_params
+			@project.skills.clear
+			Skill.all.each do |skill|
+				@project.skills << skill if params[skill.name.downcase] == "on" 	
+			end
+			@project.save
    			# redirect back to the client dashboard
    			redirect_to client_dashboard_path(@client), notice: "Project successfully updated."
    			# redirect to the show project  
 			# redirect_to client_project_path(@client, @project)
 		else
+			@skills = Skill.all
 			render "edit"
 		end
 	end
@@ -48,7 +64,8 @@ class ProjectsController < ApplicationController
 	private
 
 	def project_params
-		params[:project].permit(:id, :name, :status, :client_id)
+		params[:project].permit(:id, :name, :status, :client_id, skill: :name)
+		# params[:project].permit!
 	end
 
 	def confirm_identity

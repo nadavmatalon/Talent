@@ -6,9 +6,20 @@
 <% end %><br/>
 
 <%= form_for [@client, @project] do |form| %>
-	<div><%= form.label :name, class: 'textbox-label' %><br>
-	<%= form.text_field :name, autofocus: true, class: 'textbox' %></div>
-
+	<div>
+		<%= form.label :name, class: 'textbox-label' %><br>
+		<%= form.text_field :name, autofocus: true, class: 'textbox' %>
+	</div><br/>
+	<div>
+		<% @skills.each do |skill| %>
+			<% if @marked_skills.include?(skill) %>
+				<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
+			<% else %>
+				<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
+			<% end %>
+			<label for=<%= skill.name.downcase %>><%= skill.name %></label>
+		<% end %>
+	</div>
 	<div class='links-container')>
 		<%= form.submit 'Create', class: 'submit' %>
 		<%= link_to('Back', client_dashboard_path(@client), class: 'button') %>  
