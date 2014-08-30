@@ -112,7 +112,7 @@ body {
 	margin-left: 5px;
 	padding-left: 6px;
 	padding-top: 6px;
-	padding-bottom: 41px;
+	padding-bottom: 45px;
 	width: 30%;
 	border-radius: 4px;
 }
@@ -176,7 +176,50 @@ body {
 	color: red !important;
 }
 
+.links-container {
+	margin-top: 20px;
+	width: 100%;
+	float: left;
+}
 
+.ck-button {
+    margin: 4px;
+    background-color: rgb(220, 220, 220);
+    border-radius: 4px;
+    border: 1px solid #D0D0D0;
+    overflow: auto;
+    float: left;
+}
 
+.ck-button:hover {
+    background: rgb(200, 200, 200);
+}
+
+.ck-button label {
+    float: left;
+}
+
+.ck-button label span {
+	text-align: center;
+	display: block;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 5px;
+	padding-right: 6px;
+	font-size: 16px;
+	letter-spacing: 0.2px;
+	border: 1px solid rgb(200, 200, 200);
+}
+
+.ck-button label input {
+    position: absolute;
+    top: -20px;
+}
+
+.ck-button input:checked + span {
+    background-color: rgb(38, 142, 38);
+    border: 1px solid #347B2B;
+    color: rgb(240, 240, 240);
+}
 
 
