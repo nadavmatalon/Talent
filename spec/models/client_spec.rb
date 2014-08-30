@@ -1,6 +1,5 @@
-require 'rails_helper'
 
-describe "Client" do
+describe Client do
 
 	it 'can be created and saved in the database' do
 		expect(Client.count).to eq 0
@@ -80,10 +79,3 @@ describe "Client" do
 
 end
 
-def create_client (email = "client@example.com", password = "password", password_confirmation = "password")
-	Client.create(email: email, password: password, password_confirmation: password_confirmation)
-end
-
-def create_project (name="test_project", client_id=Client.first.id, skills=[])
-	Project.create(name: name, client_id: client_id, skills: skills)
-end

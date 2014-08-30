@@ -65,7 +65,6 @@ class ProjectsController < ApplicationController
 
 	def project_params
 		params[:project].permit(:id, :name, :status, :client_id, skill: :name)
-		# params[:project].permit!
 	end
 
 	def confirm_identity
