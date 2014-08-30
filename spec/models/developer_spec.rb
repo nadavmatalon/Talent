@@ -1,6 +1,5 @@
-require 'rails_helper'
 
-describe "Developer" do
+describe Developer do
 
 	it 'can be created and saved in the database' do
 		expect(Developer.count).to eq 0
@@ -56,6 +55,3 @@ describe "Developer" do
 
 end
 
-def create_developer (email = "developer@example.com", password = "password", password_confirmation = "password")
-	Developer.create(email: email, password: password, password_confirmation: password_confirmation)
-end

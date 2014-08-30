@@ -6,7 +6,7 @@ describe WelcomeController do
 		# @client = create_client
 		# sign_in @client
 		get :index
-		expect(response.status).to eq 200
+      	expect(response).to have_http_status(:ok)
 		expect(response).to render_template("layouts/application")
 	end
 end

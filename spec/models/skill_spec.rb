@@ -1,6 +1,5 @@
-require 'rails_helper'
 
-describe "Skill" do
+describe Skill do
 
 	it 'can be created and saved in the database' do
 		expect(Skill.count).to eq 0
@@ -26,7 +25,3 @@ describe "Skill" do
 	
 end
 
-
-def create_skill (name="Test Skill")
-	Skill.create(name: name)
-end
