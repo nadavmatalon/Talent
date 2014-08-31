@@ -22,7 +22,7 @@
             <% @skills.each do |skill| %>
                 <div class="ck-button">
                     <label for=<%= skill.name.downcase %>>
-                        <% if current_developer.skills.include?(skill) %>
+                        <% if @marked_skills.include?(skill) %>
                             <input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
                         <% else %>
                             <input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
@@ -31,8 +31,8 @@
                     </label>
                 </div>
             <% end %>
-        </div>
-    <% end %><br/><br/><br/><br/>
+        </div><br/><br/><br/><br/>
+    <% end %>
 
     <div class='textbox-container'>
         <%= f.label :password, class: 'textbox-label' %> <i>(leave blank if you don't want to change it)</i><br/>

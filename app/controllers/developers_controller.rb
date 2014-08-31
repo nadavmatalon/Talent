@@ -7,7 +7,7 @@ class DevelopersController < ApplicationController
 	end
 
 	def show
-		@skills = Skill.all
+
 	end
 
 
