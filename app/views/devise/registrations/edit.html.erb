@@ -11,9 +11,29 @@
         <%= f.label :email, class: 'textbox-label' %><br/>
         <%= f.email_field :email, autofocus: true, class: 'textbox' %>
     </div class='textbox-container'>
+ 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+    <% end %><br/>
+
+    <% if current_developer %>
+        <div>
+            <p class='project-text'>Skills:</p><br/>   
+            <% @skills.each do |skill| %>
+                <div class="ck-button">
+                    <label for=<%= skill.name.downcase %>>
+                        <% if current_developer.skills.include?(skill) %>
+                            <input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
+                        <% else %>
+                            <input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
+                        <% end %>
+                        <span><%= skill.name %></span>
+                    </label>
+                </div>
+            <% end %>
+        </div>
+    <% end %><br/><br/><br/><br/>
+
     <div class='textbox-container'>
         <%= f.label :password, class: 'textbox-label' %> <i>(leave blank if you don't want to change it)</i><br/>
         <%= f.password_field :password, autocomplete: "off", class: 'textbox' %></div>

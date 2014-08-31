@@ -45,10 +45,10 @@ class ProjectsController < ApplicationController
 				@project.skills << skill if params[skill.name.downcase] == "on" 	
 			end
 			@project.save
-   			# redirect back to the client dashboard
-   			redirect_to client_dashboard_path(@client), notice: "Project successfully updated."
    			# redirect to the show project  
-			# redirect_to client_project_path(@client, @project)
+			redirect_to client_project_path(@client, @project), notice: "Project successfully updated."
+   			# redirect back to the client dashboard
+   			# redirect_to client_dashboard_path(@client), notice: "Project successfully updated."
 		else
 			@skills = Skill.all
 			render "edit"
