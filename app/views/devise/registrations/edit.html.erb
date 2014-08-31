@@ -6,7 +6,18 @@
 <% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
+
+    <% if current_client %>
+        <% @client.errors.full_messages.each do |message| %>
+            <p class="error-message"><%= message %></p>
+        <% end %><br/>
+    <% elsif current_developer %>
+       <% @developer.errors.full_messages.each do |message| %>
+            <p class="error-message"><%= message %></p>
+        <% end %><br/>
+    <% end %>
+
+
     <div class='textbox-container'>
         <%= f.label :email, class: 'textbox-label' %><br/>
         <%= f.email_field :email, autofocus: true, class: 'textbox' %>

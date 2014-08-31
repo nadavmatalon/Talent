@@ -1,11 +1,12 @@
 
 <p class='client-title'>Edit Project</p>
 
-<% @project.errors.full_messages.each do |message| %>
-	<p class="error-message"><%= message %></p>
-<% end %><br/>
-
 <%= form_for [@client, @project] do |form| %>
+
+	<% @project.errors.full_messages.each do |message| %>
+		<p class="error-message"><%= message %></p>
+	<% end %><br/>
+
 	<div>
 		<%= form.label :name, class: 'project-text' %><br>
 		<%= form.text_field :name, autofocus: true, class: 'textbox' %>
@@ -15,7 +16,7 @@
 		<% @skills.each do |skill| %>
 			<div class="ck-button">
 				<label for=<%= skill.name.downcase %>>
-					<% if @project.skills.include?(skill) %>
+					<% if @marked_skills.include?(skill) %>
 						<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
 					<% else %>
 						<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />

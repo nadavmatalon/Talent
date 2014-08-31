@@ -36,9 +36,14 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@skills = Skill.all
+		@marked_skills = @project.skills
 	end
 
 	def update
+		@marked_skills = []
+		Skill.all.each do |skill|			
+			@marked_skills << skill if params[skill.name.downcase] == "on"			 	
+		end
    		if @project.update project_params
 			@project.skills.clear
 			Skill.all.each do |skill|
