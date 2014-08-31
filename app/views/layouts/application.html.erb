@@ -8,18 +8,24 @@
 		<%= render 'layouts/shim' %>
 	</head>
 	<body>
-		<br/>
-		<% if current_client %>
-			<%= content_tag(:p, "Welcome #{current_client.email}", id: 'system-message') %>
-   		<% elsif current_developer %>
-			<%= content_tag(:p, "Welcome #{current_developer.email}", id: 'system-message') %>
-   		<% else %>
-   			<%= content_tag(:p, "Welcome Guest", id: 'system-message') %>
-   		<% end %>
-		<br/>
-    	<%= content_tag(:p, notice, id: 'notice') if notice %>
-    	<%= content_tag(:p, alert,  id: 'alert') if alert %>
-       	<br/>       
+
+		<div class='messages-container'>		
+			<div class='system-message-container'>	
+				<% if current_client %>
+					<%= content_tag(:p, "Welcome #{current_client.email}", id: 'system-message') %>
+		   		<% elsif current_developer %>
+					<%= content_tag(:p, "Welcome #{current_developer.email}", id: 'system-message') %>
+		   		<% else %>
+		   			<%= content_tag(:p, "Welcome Guest", id: 'system-message') %>
+		   		<% end %>
+				<br/>
+			</div>
+			<div class='notice-alert-container'>
+	    		<%= content_tag(:p, notice, id: 'notice') if notice %>
+	    		<%= content_tag(:p, alert,  id: 'alert') if alert %>
+			</div>
+		</div>
+
 		<% if client_signed_in? %>
 		  	<%= link_to('Dashboard', client_dashboard_path(current_client), class: 'button') %>        
 		  	<%= link_to('Profile', client_path(current_client), class: 'button') %>        

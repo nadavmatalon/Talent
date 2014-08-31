@@ -61,9 +61,62 @@ body {
 	}
 }
 
-#system-message, #notice, #alert {
-	font-size: 18px;
+.messages-container {
+	width: 100%;
+	height: 40px;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	border: none;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.system-message-container {
+	width: 250px;
+	height: 40px;
+	display: inline-block;
+	margin-top: 0px;
+	position: initial;
+	line-height: 38px;
+}
+
+.notice-alert-container {
+	width: 800px;
+	height: 40px;
+	display: inline-block;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	line-height: 39px;
+	clear: left;
+	position: absolute;
+}
+
+.message {
+	font-family: "Gotham Narrow SSm",sans-serif,Arial;
+	font-size: 16px;
 	margin-left: 5px;
+}
+
+#system-message {
+	@extend .message;
+	color: black;
+}
+
+#notice {
+	@extend .message;
+ 	color: green;
+}
+
+#alert {
+	@extend .message;
+	color: red;
+}
+
+.error-message {
+	@extend .message;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: red !important;
 }
 
 .textbox-container {
@@ -167,13 +220,6 @@ body {
 	line-height: 24px;
 	font-size: 16px;
 	letter-spacing: 0.2px;
-}
-
-.error-message {
-	margin-left: 5px;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	color: red !important;
 }
 
 .links-container {

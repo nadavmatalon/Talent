@@ -1,4 +1,17 @@
 
 <p class='developer-title'>Developer Profile</p>
 
-<p class='textbox-label'>Email: <%= @developer.email %></p>
+<p class='textbox-label'>Email: <%= @developer.email %></p><br/>
+
+<p class='project-text'>Skills:</p>
+<% if @developer.skills.any? %>
+	<% @developer.skills.each do |skill| %>
+		<div class="ck-button">
+			<label><span><%= skill.name %></span></label>
+		</div>
+	<% end %>
+<% else %>
+	<p class='project-text'>No skills defined</p>
+<% end %>
+
+

@@ -1,39 +1,67 @@
 class Developers::RegistrationsController < Devise::RegistrationsController
-  
-  def update
-    # For Rails 4
-    account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
-    # For Rails 3
-    # account_update_params = params[:developer]
 
-    # required for settings form to submit when password is left blank
-    if account_update_params[:password].blank?      
-      account_update_params.delete("password")
-      account_update_params.delete("password_confirmation")
+    before_action :all_skills
+    before_action :marked_skills, except: [:edit]
+
+    def new
+        @developer = Developer.new
     end
 
-    if account_update_params[:email].blank?      
-      account_update_params.delete("email")
+    def create
+        sign_up_params = devise_parameter_sanitizer.sanitize(:developer_sign_up)
+        @developer = Developer.new sign_up_params
+        populate @marked_skills
+        if @developer.save
+            populate @developer.skills
+            sign_in @developer
+            flash[:notice] = 'Signed up successfully'
+            redirect_to developer_dashboard_path(@developer)
+        else
+            render 'new'
+        end
     end
 
-    if account_update_params[:current_password].blank?      
-      account_update_params.delete("current_password")
+    def edit
+        @marked_skills = @developer.skills
     end
 
-    @developer = Developer.find(current_developer.id)
-    if @developer.update_attributes(account_update_params)
-      set_flash_message :notice, :updated
-      # Sign in the user bypassing validation in case their password changed
-      # sign_in @developer, bypass: true
-      sign_in_and_redirect @developer,  bypass: true
-    else
-      render "edit"
+    def update
+        update_params = devise_parameter_sanitizer.sanitize(:developer_update)
+        if update_params[:password].blank?
+            update_params.delete('password')
+            update_params.delete('password_confirmation')
+        end
+        @developer = Developer.find_by(id: current_developer.id)
+        populate @marked_skills
+        if @developer.update_attributes update_params
+            populate @developer.skills
+            @developer.save
+            sign_in @developer, bypass: true
+            flash[:notice] = 'Profile successfully updated'
+            # redirect to show developer profile 
+            redirect_to developer_path(@developer)
+            # redirect to developer dashboard 
+            # redirect_to developer_dashboard_path(@developer)
+        else
+            render 'edit'
+        end
     end
-  end
 
-  protected
 
-  def after_update_path_for(resource)
-    developer_path(resource)
-  end
+    private
+
+    def all_skills
+        @skills = Skill.all
+    end
+
+    def marked_skills
+        @marked_skills = []
+    end
+
+    def populate skills
+        skills.clear if skills.any?
+        Skill.all.each { |skill| skills << skill if params[skill.name.downcase] == 'on' }             
+    end
+
 end
+

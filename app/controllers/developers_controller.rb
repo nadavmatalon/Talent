@@ -3,12 +3,13 @@ class DevelopersController < ApplicationController
 	before_action :authenticate_developer!, :confirm_identity
 
 	def index
-		
+
 	end
 
 	def show
 
 	end
+
 
 	private
 
