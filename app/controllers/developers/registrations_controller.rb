@@ -1,73 +1,49 @@
 class Developers::RegistrationsController < Devise::RegistrationsController
 
+    before_action :all_skills
+
+    before_action :marked_skills, except: [:edit]
+
     def new
-        @skills = Skill.all
-        @marked_skills = []
         @developer = Developer.new
     end
 
     def create
         @developer = Developer.new developer_params
-        @marked_skills = []
-        Skill.all.each do |skill|           
-            @marked_skills << skill if params[skill.name.downcase] == "on"              
-        end
+        populate @marked_skills
         if @developer.save
-            Skill.all.each do |skill|           
-                @developer.skills << skill if params[skill.name.downcase] == "on"             
-            end
+            populate @developer.skills
             sign_in @developer
-            redirect_to developer_dashboard_path(@developer), notice: "Signed up successfully."
+            flash[:notice] = 'Signed up successfully'
+            redirect_to developer_dashboard_path(@developer)
         else
-            @skills = Skill.all
             render "new"
         end
     end
 
     def edit
-        @skills = Skill.all
         @marked_skills = @developer.skills
     end
 
     def update
-
         account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
-
-        # required for settings form to submit when password is left blank
         if account_update_params[:password].blank?
-            account_update_params.delete("password")
-            account_update_params.delete("password_confirmation")
+            account_update_params.delete('password')
+            account_update_params.delete('password_confirmation')
         end
-
-        if account_update_params[:email].blank?
-            account_update_params.delete("email")
-        end
-
-        if account_update_params[:current_password].blank?
-            account_update_params.delete("current_password")
-        end
-
-        @developer = Developer.find(current_developer.id)
-
-        @marked_skills = []
-        Skill.all.each do |skill|           
-            @marked_skills << skill if params[skill.name.downcase] == "on"              
-        end
-
-        if @developer.update_attributes(account_update_params)
-            @developer.skills.clear
-            Skill.all.each do |skill|
-                @developer.skills << skill if params[skill.name.downcase] == "on"
-            end
+        @developer = Developer.find_by(id: current_developer.id)
+        populate @marked_skills
+        if @developer.update_attributes account_update_params
+            populate @developer.skills
             @developer.save
             sign_in @developer, bypass: true
+            flash[:notice] = 'Profile successfully updated'
             # redirect to show developer profile 
-            redirect_to developer_path(@developer), notice: "Profile successfully updated."          
+            redirect_to developer_path(@developer)
             # redirect to developer dashboard 
-            # redirect_to developer_dashboard_path(@developer), notice: "Profile successfully updated."
+            # redirect_to developer_dashboard_path(@developer)
         else
-            @skills = Skill.all
-            render "edit"
+            render 'edit'
         end
     end
 
@@ -78,10 +54,22 @@ class Developers::RegistrationsController < Devise::RegistrationsController
         params[:developer].permit(:id, :email, :password, :password_confirmation, skill: :name)
     end
 
-    def after_update_path_for(resource)
-        developer_path(resource)
+    def after_update_path_for resource
+        developer_path resource
+    end
+
+    def all_skills
+        @skills = Skill.all
+    end
+
+    def marked_skills
+        @marked_skills = []
+    end
+
+    def populate skills
+        skills.clear if skills.any?
+        Skill.all.each { |skill| skills << skill if params[skill.name.downcase] == "on" }             
     end
 
 end
-
 
