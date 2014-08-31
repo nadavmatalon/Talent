@@ -1,7 +1,6 @@
 class Developers::RegistrationsController < Devise::RegistrationsController
 
     before_action :all_skills
-
     before_action :marked_skills, except: [:edit]
 
     def new
@@ -9,7 +8,8 @@ class Developers::RegistrationsController < Devise::RegistrationsController
     end
 
     def create
-        @developer = Developer.new developer_params
+        sign_up_params = devise_parameter_sanitizer.sanitize(:developer_sign_up)
+        @developer = Developer.new sign_up_params
         populate @marked_skills
         if @developer.save
             populate @developer.skills
@@ -17,7 +17,7 @@ class Developers::RegistrationsController < Devise::RegistrationsController
             flash[:notice] = 'Signed up successfully'
             redirect_to developer_dashboard_path(@developer)
         else
-            render "new"
+            render 'new'
         end
     end
 
@@ -26,14 +26,14 @@ class Developers::RegistrationsController < Devise::RegistrationsController
     end
 
     def update
-        account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
-        if account_update_params[:password].blank?
-            account_update_params.delete('password')
-            account_update_params.delete('password_confirmation')
+        update_params = devise_parameter_sanitizer.sanitize(:developer_update)
+        if update_params[:password].blank?
+            update_params.delete('password')
+            update_params.delete('password_confirmation')
         end
         @developer = Developer.find_by(id: current_developer.id)
         populate @marked_skills
-        if @developer.update_attributes account_update_params
+        if @developer.update_attributes update_params
             populate @developer.skills
             @developer.save
             sign_in @developer, bypass: true
@@ -50,14 +50,6 @@ class Developers::RegistrationsController < Devise::RegistrationsController
 
     private
 
-    def developer_params
-        params[:developer].permit(:id, :email, :password, :password_confirmation, skill: :name)
-    end
-
-    def after_update_path_for resource
-        developer_path resource
-    end
-
     def all_skills
         @skills = Skill.all
     end
@@ -68,7 +60,7 @@ class Developers::RegistrationsController < Devise::RegistrationsController
 
     def populate skills
         skills.clear if skills.any?
-        Skill.all.each { |skill| skills << skill if params[skill.name.downcase] == "on" }             
+        Skill.all.each { |skill| skills << skill if params[skill.name.downcase] == 'on' }             
     end
 
 end

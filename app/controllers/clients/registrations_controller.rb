@@ -1,41 +1,38 @@
 class Clients::RegistrationsController < Devise::RegistrationsController
 
-    def update
+    def new
+        @client = Client.new
+    end
 
-        account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
-
-        # required for settings form to submit when password is left blank
-        if account_update_params[:password].blank?
-            account_update_params.delete("password")
-            account_update_params.delete("password_confirmation")
-        end
-
-        if account_update_params[:email].blank?
-            account_update_params.delete("email")
-        end
-
-        if account_update_params[:current_password].blank?
-            account_update_params.delete("current_password")
-        end
-
-        @client = Client.find(current_client.id)
-
-        if @client.update_attributes(account_update_params)
-            sign_in @client, bypass: true
-            # redirect to show developer profile 
-            redirect_to client_path(@client), notice: "Profile successfully updated."          
-            # redirect to client dashboard 
-            # redirect_to client_dashboard_path(@client), notice: "Profile successfully updated."
+    def create
+        sign_up_params = devise_parameter_sanitizer.sanitize(:client_sign_up)
+        @client = Client.new sign_up_params
+        if @client.save
+            sign_in @client
+            flash[:notice] = 'Signed up successfully'
+            redirect_to client_dashboard_path(@client)
         else
-            render "edit"
+            render 'new'
         end
     end
 
-
-    private
-    
-    def after_update_path_for(resource)
-        client_path(resource)
+    def update
+        update_params = devise_parameter_sanitizer.sanitize(:client_update)
+        if update_params[:password].blank?
+            update_params.delete('password')
+            update_params.delete('password_confirmation')
+        end
+        @client = Client.find_by(id: current_client.id)
+        if @client.update_attributes update_params
+            sign_in @client, bypass: true
+            flash[:notice] = 'Profile successfully updated'
+            # redirect to show clinet profile 
+            redirect_to client_path(@client)
+            # redirect to client dashboard 
+            # redirect_to client_dashboard_path(@client)
+        else
+            render 'edit'
+        end
     end
 
 end
