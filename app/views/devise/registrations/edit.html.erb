@@ -17,7 +17,6 @@
         <% end %><br/>
     <% end %>
 
-
     <div class='textbox-container'>
         <%= f.label :email, class: 'textbox-label' %><br/>
         <%= f.email_field :email, autofocus: true, class: 'textbox' %>
@@ -38,6 +37,7 @@
                         <% else %>
                             <input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
                         <% end %>
+                       <% skill.name.gsub!('_', ' ') if skill.name.include?('_') %>
                         <span><%= skill.name %></span>
                     </label>
                 </div>
@@ -53,9 +53,14 @@
         <%= f.password_field :password_confirmation, autocomplete: "off", class: 'textbox' %>
     </div>
     <div>
-        <%= f.submit "Update", class: 'submit' %><br/><br/>
+        <%= f.submit "Update", class: 'submit' %>
+        <% if current_client %>
+            <%= link_to('Back', client_path(current_client), class: 'button') %>      
+        <% elsif current_developer %>
+            <%= link_to('Back', developer_path(current_developer), class: 'button') %>      
+        <% end %>
     </div>
-<% end %>
+<% end %><br/><br/>
 
 <div>
     <p class='textbox-label'>Cancel my account</p>

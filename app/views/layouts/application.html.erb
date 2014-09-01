@@ -28,13 +28,11 @@
 
 		<% if client_signed_in? %>
 		  	<%= link_to('Dashboard', client_dashboard_path(current_client), class: 'button') %>        
-		  	<%= link_to('Profile', client_path(current_client), class: 'button') %>        
-		  	<%= link_to('Edit Profile', edit_client_registration_path, class: 'button') %>        
+			<%= link_to('Profile', client_path(current_client), class: 'button') %>        
 		  	<%= link_to('Sign out', destroy_client_session_path, method: :delete, class: 'button') %> 
 		<% elsif developer_signed_in? %>
 		  	<%= link_to('Dashboard', developer_dashboard_path(current_developer), class: 'button') %>        
 		  	<%= link_to('Profile', developer_path(current_developer), class: 'button') %>        
-		  	<%= link_to('Edit Profile', edit_developer_registration_path, class: 'button') %>        
 		  	<%= link_to('Sign out', destroy_developer_session_path, method: :delete, class: 'button') %> 
 		<% else %>
 		 	<%= link_to('Developer Sign up', new_developer_registration_path, class: 'button') %>  

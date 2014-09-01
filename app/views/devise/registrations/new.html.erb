@@ -27,6 +27,7 @@
 						<% else %>
 							<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
 						<% end %>
+						<% skill.name.gsub!('_', ' ') if skill.name.include?('_') %>
 						<span><%= skill.name %></span>
 					</label>
 				</div>

@@ -3,3 +3,9 @@
 
 <p class='textbox-label'>Email: <%= @client.email %></p><br/>
 
+<br/><br/>
+
+
+<%= link_to('Edit Profile', edit_client_registration_path, class: 'button') %>        
+<%= link_to('Back', client_dashboard_path(current_client), class: 'button') %>        
+
