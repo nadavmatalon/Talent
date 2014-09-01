@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
     before_filter :configure_permitted_parameters, if: :devise_controller?
 
+    before_filter :sign_out_all_users, if: Proc.new { current_client && current_developer }
+
 
     private
 
@@ -23,6 +25,11 @@ class ApplicationController < ActionController::Base
         elsif current_developer
             developer_dashboard_path(current_developer)
         end
+    end
+
+    def sign_out_all_users
+        sign_out current_client
+        sign_out current_developer
     end
 
     def configure_permitted_parameters
