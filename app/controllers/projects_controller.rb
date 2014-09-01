@@ -56,7 +56,11 @@ class ProjectsController < ApplicationController
 	private
 
     def all_skills
-        @skills = Skill.all
+        @skills = []
+        Skill.all.each do |skill| 
+        	skill.name.gsub!(/\s+/, '_') if skill.name.include?(' ')
+        	@skills << skill
+        end
     end
 
     def marked_skills
@@ -65,7 +69,10 @@ class ProjectsController < ApplicationController
 
    def populate skills
         skills.clear if skills.any?
-        Skill.all.each { |skill| skills << skill if params[skill.name.downcase] == 'on' }             
+        Skill.all.each do |skill| 
+           	skill.name.gsub!(/\s+/, '_') if skill.name.include?(' ')
+        	skills << skill if params[skill.name.downcase] == 'on'
+        end
     end
 
 	def project_params

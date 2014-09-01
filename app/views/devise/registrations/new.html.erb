@@ -27,13 +27,13 @@
 						<% else %>
 							<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
 						<% end %>
+						<% skill.name.gsub!('_', ' ') if skill.name.include?('_') %>
 						<span><%= skill.name %></span>
 					</label>
 				</div>
 			<% end %>
 		</div><br/><br/><br/><br/>
 	<% end %>
-
 
 	<div class='textbox-container'>
 		<%= f.label :password, class: 'textbox-label' %><br/>
@@ -48,6 +48,4 @@
 		<%= f.submit "Sign up", class: 'submit' %>
 	</div>
 <% end %>
-
-<%= render "devise/shared/links" %>
 

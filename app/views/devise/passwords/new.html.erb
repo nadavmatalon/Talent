@@ -1,12 +1,31 @@
-<h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
-
-  <div><%= f.submit "Send me reset password instructions" %></div>
+<% if resource_name.to_s == 'client' %>
+    <p class='client-title'>Client Reset Password</p>
+<% elsif resource_name.to_s == 'developer' %>
+    <p class='developer-title'>Developer Reset Password</p>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
+	<% resource.errors.full_messages.each do |message| %>
+		<br/><p class="error-message"><%= message %></p>
+	<% end %><br/>
+
+	<p class='project-text'>Please enter your email to receive instructions:</p><br/>   
+
+	<div><%= f.label :email , class: 'hidden-label' %>
+		<%= f.email_field :email, autofocus: true, class: 'textbox' %>
+	</div>
+
+	<div>
+		<%= f.submit "Submit", class: 'submit' %>
+
+		<% if resource_name.to_s == 'client' %>
+		  	<%= link_to('Back', new_client_session_path, class: 'button') %>  
+		<% elsif resource_name.to_s == 'developer' %>
+			<%= link_to('Back', new_developer_session_path, class: 'button') %>  
+		<% end %>
+	</div>
+
+<% end %>
+
