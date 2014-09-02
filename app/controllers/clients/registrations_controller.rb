@@ -5,7 +5,7 @@ class Clients::RegistrationsController < Devise::RegistrationsController
     end
 
     def create
-        sign_up_params = devise_parameter_sanitizer.sanitize(:client_sign_up)
+        sign_up_params = devise_parameter_sanitizer.sanitize(:sign_up)
         @client = Client.new sign_up_params
         if @client.save
             sign_in @client

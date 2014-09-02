@@ -24,7 +24,3 @@ describe ClientsController do
 
 end
 
-
-def create_client (email = "client@example.com", password = "password", password_confirmation = "password")
-	Client.create(email: email, password: password, password_confirmation: password_confirmation)
-end

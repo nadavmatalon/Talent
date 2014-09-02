@@ -14,31 +14,13 @@
 	<div class='textbox-container'>
 		<%= f.label :email, class: 'textbox-label' %><br/>
 		<%= f.email_field :email, autofocus: true, class: 'textbox' %>
-	</div><br/>
-
-	<% if resource_name.to_s == 'developer' %>
-		<div>
-			<p class='project-text'>Skills:</p><br/>
-			<% @skills.each do |skill| %>
-				<div class="ck-button">
-					<label for=<%= skill.name.downcase %>>
-						<% if @marked_skills.include?(skill) %>
-							<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" checked />
-						<% else %>
-							<input id=<%= skill.name.downcase %> name=<%= skill.name.downcase %> type="checkbox" />
-						<% end %>
-						<% skill.name.gsub!('_', ' ') if skill.name.include?('_') %>
-						<span><%= skill.name %></span>
-					</label>
-				</div>
-			<% end %>
-		</div><br/><br/><br/><br/>
-	<% end %>
+	</div>
 
 	<div class='textbox-container'>
 		<%= f.label :password, class: 'textbox-label' %><br/>
 		<%= f.password_field :password, autocomplete: "off", class: 'textbox' %>
 	</div>
+
 	<div class='textbox-container'>
 		<%= f.label :password_confirmation, class: 'textbox-label' %><br/>
 		<%= f.password_field :password_confirmation, autocomplete: "off", class: 'textbox' %>
@@ -47,5 +29,6 @@
 	<div>
 		<%= f.submit "Sign up", class: 'submit' %>
 	</div>
+	
 <% end %>
 

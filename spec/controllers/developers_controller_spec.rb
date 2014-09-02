@@ -23,7 +23,3 @@ describe DevelopersController do
 	end
 end
 
-
-def create_developer (email = "developer@example.com", password = "password", password_confirmation = "password")
-	Developer.create(email: email, password: password, password_confirmation: password_confirmation)
-end

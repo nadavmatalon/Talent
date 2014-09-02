@@ -5,18 +5,18 @@
 	<% if @projects != [] %>
 		<% @projects.each do |project| %>
 			<div class='project-container'>
-				<p class='project-text'>Project ID: <%= project.id %></p>
-				<p class='project-text'>Project name: <%= project.name %></p>
-				<p class='project-text'>Project status: <%= project.status %></p>
-				<p class='project-text'>Project required skills:</p>
+				<p class='project-text'>ID: <%= project.id %></p>
+				<p class='project-text'>Name: <%= project.name %></p>
+				<p class='project-text'>Status: <%= project.status.capitalize %></p>
 					<% if project.skills.any? %>
+						<p class='project-text'>Required skills:</p>
 						<% project.skills.each do |skill| %>
-							<div class="ck-button">
+							<div class="ck-button-show">
 								<label><span><%= skill.name %></span></label>
 							</div>
 						<% end %>
 					<% else %>
-						<p class='project-text'>No skills defined</p>
+						<p class='project-text'>Required skills: Not defined</p>
 					<% end %>
 				<br/><br/>
 				<p class='project-links'>

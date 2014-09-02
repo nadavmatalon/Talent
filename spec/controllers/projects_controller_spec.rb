@@ -8,11 +8,11 @@ describe ProjectsController do
 
 	before (:each) { sign_in client }
 
-  	it "renders the 'projects/new' view", scope: :project do
-      	get :new, client_id: client.id
-     	  expect(response).to have_http_status(:ok)
-      	expect(controller.current_client).to eq client
-      	expect(controller.controller_path).to eq 'projects'
+    it "renders the 'projects/new' view", scope: :project do
+        get :new, client_id: client.id
+        expect(response).to have_http_status(:ok)
+        expect(controller.current_client).to eq client
+        expect(controller.controller_path).to eq 'projects'
       	expect(response).to render_template 'projects/new'
 	end
 
@@ -34,11 +34,3 @@ describe ProjectsController do
 
 end
 
-
-def create_client (email = "client@example.com", password = "password", password_confirmation = "password")
-	Client.create(email: email, password: password, password_confirmation: password_confirmation)
-end
-
-def create_project (name="test_project", client_id=Client.first.id, skills=[])
-  Project.create(name: name, client_id: client_id, skills: skills)
-end

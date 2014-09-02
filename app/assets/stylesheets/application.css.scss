@@ -29,7 +29,7 @@ body {
 
 .general-title {
 	@extend .title;
-	color: blue;
+	color: rgb(26, 61, 185);
 }
 
 .client-title {
@@ -56,8 +56,8 @@ body {
 	margin-left: 5px;
 	margin-right: 5px;
 	&:hover {
-		color: rgb(120, 120, 120);
 		cursor: default;
+		color: #8C42D4;
 	}
 }
 
@@ -129,7 +129,7 @@ body {
 	text-decoration: none !important;
 	&:hover {
 		cursor: default;
-		color: blue;
+		color: rgb(26, 61, 185);
 	}
 }
 
@@ -167,7 +167,7 @@ body {
 	background: gainsboro;
 	letter-spacing: -0.4px;
 	&:hover {
-		color: rgb(120, 120, 120);
+		color: #8C42D4;
 		cursor: default;
 	}
 }
@@ -188,6 +188,8 @@ body {
 	font-size: 18px;
 	margin-top: 4px;
 	margin-left: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
 }
 
 .project-links {
@@ -213,7 +215,7 @@ body {
 	display: inline-block;
 	margin-top: -17px;
 	&:hover {
-		color: rgb(120, 120, 120);
+		color: #8C42D4;
 		cursor: default;
 	}
 }
@@ -277,9 +279,38 @@ body {
 }
 
 .ck-button input:checked + span {
-    background-color: rgb(38, 142, 38);
-    border: 1px solid #347B2B;
+	background-color: rgba(38, 113, 22, 0.65);
+	border: 1px solid rgba(93, 123, 108, 0.43);
     color: rgb(240, 240, 240);
 }
 
+.ck-button-show {
+	margin: 4px;
+	border-radius: 4px;
+	background-color: rgba(38, 113, 22, 0.65);
+ 	overflow: auto;
+	float: left;
+}
+
+.ck-button-show label {
+    float: left;
+}
+
+.ck-button-show label span {
+	text-align: center;
+	display: block;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 5px;
+	padding-right: 6px;
+	font-size: 16px;
+	letter-spacing: 0.2px;
+	border: 1px solid rgba(93, 123, 108, 0.43);
+    color: rgb(240, 240, 240);
+}
+
+.ck-button-show label input {
+    position: absolute;
+    top: -20px;
+}
 

@@ -7,7 +7,7 @@ def create_developer (email = "developer@example.com", password = "password", pa
 	Developer.create(email: email, password: password, password_confirmation: password_confirmation)
 end
 
-def create_project (name="test_project", client_id=Client.first.id, skills=[])
+def create_project (name="Test Project", client_id=Client.first.id, skills=[])
 	Project.create(name: name, client_id: client_id, skills: skills)
 end
 
