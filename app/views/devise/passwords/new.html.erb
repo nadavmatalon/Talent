@@ -18,7 +18,7 @@
 	</div>
 
 	<div>
-		<%= f.submit "Submit", class: 'submit' %>
+		<%= f.submit "Submit", class: 'submit', id: 'submit-spinner' %>
 
 		<% if resource_name.to_s == 'client' %>
 		  	<%= link_to('Back', new_client_session_path, class: 'button') %>  
@@ -28,4 +28,8 @@
 	</div>
 
 <% end %>
+
+<div id='spinner' class='spinner' style='display: none;' >
+	<%= image_tag '/assets/spinner.gif', alt: 'Loading', id: 'img-spinner' %>
+</div>
 
