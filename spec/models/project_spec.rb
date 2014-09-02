@@ -3,7 +3,12 @@ describe Project do
 
 	before (:each) { create_client }
 
-	it 'can be created and saved in the database' do
+	it 'can be created' do
+		name, client_id = 'Test Project', Client.first.id
+		expect(Project.new(name: name, client_id: client_id).valid?).to be true
+	end
+
+	it 'can be saved in the database' do
 		expect(Project.count).to eq 0
 		create_project
 		expect(Project.count).to eq 1
@@ -11,7 +16,7 @@ describe Project do
 
 	it 'can be retrieved from he database' do
 		create_project
-		expect(Project.first.name).to eq "test_project"
+		expect(Project.first.name).to eq 'Test Project'
 	end
 
 	it 'can be removed from the database' do
@@ -26,51 +31,47 @@ describe Project do
 	end	
 
 	it 'cannot be saved in the database without a name' do
-		create_project("", Client.first.id)
+		create_project('', Client.first.id)
 		expect(Project.count).to eq 0
 	end	
 
 	it "cannot be saved in the database without a client's id" do
-		create_project("test_project", "")
+		create_project('Test Project', '')
 		expect(Project.count).to eq 0
 	end	
 
 	it 'name must be unique' do
-		client_two = create_client
-		create_project("test_project", Client.first.id)
-		create_project("test_project", client_two.id)
+		2.times { create_project('Test Project', Client.first.id) }
 		expect(Project.count).to eq 1
 	end	
 
 	it 'name is case insensitive' do
-		client_two = create_client
-		create_project("test_project", Client.first.id)
-		create_project("Test_Project", client_two.id)
+		create_project('Test Project', Client.first.id)
+		create_project('test project', Client.first.id)
 		expect(Project.count).to eq 1
 	end
 
-	it "is created without 'required skills' by default" do
+	it 'is created without required skills by default' do
 		project = create_project
 		expect(project.skills.count).to eq 0
 	end	
 
-	it "can have a 'required skill'" do
+	it 'can have a required skill' do
 		project = create_project
 		project.skills << create_skill
 		expect(project.skills.count).to eq 1
 	end	
 
-	it "can have more than one 'required skill'" do
+	it 'can have more than one required skill' do
 		project = create_project
-		project.skills << create_skill("Skill_One")
-		project.skills << create_skill("Skill_Two")
+		project.skills << create_skill('Skill One') << create_skill('Skill Two')
 		expect(project.skills.count).to eq 2
 	end	
 
-	it "knows what are it's 'required skills'" do
+	it "knows what are it's required skills" do
 		project = create_project
 		project.skills << create_skill
-		expect(project.skills.first.name).to eq "Test Skill"
+		expect(project.skills.first.name).to eq 'Test Skill'
 	end	
 
 end

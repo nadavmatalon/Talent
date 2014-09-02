@@ -1,18 +1,16 @@
 class Developers::RegistrationsController < Devise::RegistrationsController
 
-    before_action :all_skills
-    before_action :marked_skills, except: [:edit]
+    before_action :all_skills, only: [:edit, :update]
+    before_action :marked_skills, only: [:edit, :update]
 
     def new
         @developer = Developer.new
     end
 
     def create
-        sign_up_params = devise_parameter_sanitizer.sanitize(:developer_sign_up)
+        sign_up_params = devise_parameter_sanitizer.sanitize(:sign_up)
         @developer = Developer.new sign_up_params
-        populate @marked_skills
         if @developer.save
-            populate @developer.skills
             sign_in @developer
             flash[:notice] = 'Signed up successfully'
             redirect_to developer_dashboard_path(@developer)

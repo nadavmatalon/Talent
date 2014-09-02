@@ -4,16 +4,16 @@
 <div class='project-container'>
 	<p class='project-text'>ID: <%= @project.id %></p>
 	<p class='project-text'>Name: <%= @project.name %></p>
-	<p class='project-text'>Status: <%= @project.status %></p>
-	<p class='project-text'>Required Skills:</p>
+	<p class='project-text'>Status: <%= @project.status.capitalize %></p>
 	<% if @project.skills.any? %>
+		<p class='project-text'>Required Skills:</p>
 		<% @project.skills.each do |skill| %>
-			<div class="ck-button">
+			<div class="ck-button-show">
 				<label><span><%= skill.name %></span></label>
 			</div>
 		<% end %>
 	<% else %>
-		<p class='project-text'>No skills defined</p>
+		<p class='project-text'>Required Skills: Not defined</p>
 	<% end %>
 </div>
 
