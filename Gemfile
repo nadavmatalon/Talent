@@ -47,17 +47,17 @@ group :test, :development do
     gem 'rspec-collection_matchers', '~> 1.0.0'
 end
 
-group :development do
-	# https://github.com/rails/spring
-	gem 'spring', '~> 1.1'
- end
-
 group :production do
     # https://github.com/heroku/rails_12factor  
     gem 'rails_12factor', '~> 0.0.2'
     # https://github.com/alexpeattie/heroku_secrets
 	gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 end
+
+# group :development do
+    # https://github.com/rails/spring
+    # gem 'spring', '~> 1.1'
+ # end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -67,6 +67,4 @@ end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-
-
 
