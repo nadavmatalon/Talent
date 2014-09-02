@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
     root 'welcome#index' 
 
-    get "clients/:id/index", to: 'clients#index', as: :client_dashboard 
+    get 'clients/:id/index', to: 'clients#index', as: :client_dashboard 
 
-    get "developers/:id/index", to: 'developers#index', as: :developer_dashboard 
+    get 'developers/:id/index', to: 'developers#index', as: :developer_dashboard 
 
     resources :clients do 
         resources :projects
