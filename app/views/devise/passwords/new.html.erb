@@ -16,17 +16,18 @@
 	<div><%= f.label :email , class: 'hidden-label' %>
 		<%= f.email_field :email, autofocus: true, class: 'textbox' %>
 	</div>
-
-	<div>
-		<%= f.submit "Submit", class: 'submit', id: 'submit-spinner' %>
-
-		<% if resource_name.to_s == 'client' %>
-		  	<%= link_to('Back', new_client_session_path, class: 'button') %>  
-		<% elsif resource_name.to_s == 'developer' %>
+    <div class='submit-back-container'>
+        <div class='submit-container'>
+			<%= f.submit "Submit", class: 'submit', id: 'submit-spinner' %>
+        </div>
+        <div class='back-container'>
+			<% if resource_name.to_s == 'client' %>
+		  		<%= link_to('Back', new_client_session_path, class: 'button') %>  
+			<% elsif resource_name.to_s == 'developer' %>
 			<%= link_to('Back', new_developer_session_path, class: 'button') %>  
-		<% end %>
-	</div>
-
+            <% end %>
+        </div>
+    </div>
 <% end %>
 
 <%= image_tag '/assets/spinner.gif', alt: 'Loading', id: 'spinner', style: 'display: none;' %>
