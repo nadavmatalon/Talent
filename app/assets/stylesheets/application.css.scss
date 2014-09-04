@@ -43,7 +43,7 @@ body {
 }
 
 .button {
-	padding-top: 6px;
+	padding-top: 5px;
 	padding-left: 7px;
 	padding-right: 8px;
 	padding-bottom: 5px;
@@ -59,6 +59,24 @@ body {
 		cursor: default;
 		color: #8C42D4;
 	}
+}
+
+.submit-back-container {
+	display: block;
+	margin-bottom: 1px;
+	margin-top: 6px;
+	height: 65px;
+}
+
+.submit-container {
+	display: inline;
+	position: relative;
+}
+
+.back-container {
+	margin-top: -22px;
+	margin-bottom: 34px;
+	margin-left: 80px;
 }
 
 .messages-container {
@@ -320,3 +338,11 @@ body {
 	margin-left: 385px;
 }
 
+
+.remember-checkbox {
+	width: 14px;
+	margin-left: 10px;
+	display: inline-flex;
+	margin-right: -5px;
+	margin-top: 10px;
+}

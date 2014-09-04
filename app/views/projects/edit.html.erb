@@ -27,9 +27,15 @@
 			</div>
 		<% end %>
 	</div>
-	<div class='links-container')>
-		<%= form.submit 'Update', class: 'submit' %>
-		<%= link_to('Back', client_dashboard_path(@client), class: 'button') %>  
+    <div class='submit-back-container'>
+    	<div class='links-container')>
+    		<div class='submit-container'>
+  	      		<%= form.submit 'Update', class: 'submit' %>
+			</div>
+			<div class='back-container'>
+				<%= link_to('Back', client_dashboard_path(@client), class: 'button') %>  
+			</div>
+		</div>
 	</div>
 <% end %>
 
