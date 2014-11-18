@@ -12,18 +12,19 @@ class ApplicationController < ActionController::Base
     private
 
     def after_sign_up_path_for(resource)
+        
         if current_client
-            client_dashboard_path(current_client)
+            client_dashboard_path(resource)
         elsif current_developer
-            developer_dashboard_path(current_developer)
+            developer_dashboard_path(resource)
         end
     end
 
     def after_sign_in_path_for(resource)
         if current_client
-            client_dashboard_path(current_client)
+            client_dashboard_path(resource)
         elsif current_developer
-            developer_dashboard_path(current_developer)
+            developer_dashboard_path(resource)
         end
     end
 
@@ -33,12 +34,12 @@ class ApplicationController < ActionController::Base
     end
 
     def configure_permitted_parameters
-        devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:id, :email, :password, :password_confirmation) }
-        devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:id, :email, :password, :remember_me) }
-        devise_parameter_sanitizer.for(:client_update) { |u| u.permit(:id, :email, :password, :password_confirmation) }
-        devise_parameter_sanitizer.for(:developer_update) { |u| u.permit(:id, :email, :password, :password_confirmation, skill: :name) }
-        devise_parameter_sanitizer.for(:password_new) { |u| u.permit(:id, :email, :password, :password_confirmation) }
-        devise_parameter_sanitizer.for(:password_edit) { |u| u.permit(:id, :email, :password, :password_confirmation) }
+        devise_parameter_sanitizer.for(:sign_up) { |user| user.permit(:id, :email, :password, :password_confirmation) }
+        devise_parameter_sanitizer.for(:sign_in) { |user| user.permit(:id, :email, :password, :remember_me) }
+        devise_parameter_sanitizer.for(:client_update) { |user| user.permit(:id, :email, :password, :password_confirmation) }
+        devise_parameter_sanitizer.for(:developer_update) { |user| user.permit(:id, :email, :password, :password_confirmation, skill: :name) }
+        devise_parameter_sanitizer.for(:password_new) { |user| user.permit(:id, :email, :password, :password_confirmation) }
+        devise_parameter_sanitizer.for(:password_edit) { |user| user.permit(:id, :email, :password, :password_confirmation) }
     end
 
 end
